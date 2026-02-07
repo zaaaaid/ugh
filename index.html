@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>💜 A Question 💜</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        background: #e6d9ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .container {
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        max-width: 90%;
+    }
+
+    h1 {
+        color: #6a4fcf;
+    }
+
+    p {
+        color: #555;
+        font-size: 18px;
+    }
+
+    button {
+        padding: 12px 28px;
+        font-size: 18px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #startBtn {
+        background: #b799ff;
+        color: white;
+    }
+
+    #yesBtn {
+        background: #9f80ff;
+        color: white;
+    }
+
+    #noBtn {
+        background: #ff7b7b;
+        color: white;
+        position: absolute;
+    }
+
+    img.main-img {
+        max-width: 100%;
+        border-radius: 15px;
+        margin-bottom: 15px;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+<!-- INTRO -->
+<div class="container" id="intro">
+    <h1>💜</h1>
+    <p><strong>Since February 14 is coming,</strong></p>
+    <p><strong>can I be the <span style="color:#6a4fcf;">1</span> <span style="color:#ff7b7b;">4</span> you?</strong></p>
+    <br>
+    <button id="startBtn">Start</button>
+</div>
+
+<!-- QUESTION -->
+<div class="container hidden" id="questionBox">
+    <img src="choice.jpg" class="main-img" alt="Choice">
+    <h1>Will you be my Valentine? 💜</h1>
+    <br>
+    <button id="yesBtn">YES 💕</button>
+    <button id="noBtn">NO 😭</button>
+</div>
+
+<!-- NO FINAL -->
+<div class="container hidden" id="noFinal">
+    <img src="no.jpg" class="main-img" alt="No">
+    <h1>naah, you will be my valentine 💜</h1>
+</div>
+
+<!-- YES FINAL -->
+<div class="container hidden" id="yesFinal">
+    <h1>ugh leeg ang tama pakak hihi 💜</h1>
+    <p>kinilig ka no 😌</p>
+    <p>syempre, ikaw na ‘yan eh 💕</p>
+    <p>happy valentines, baby 💜</p>
+</div>
+
+<script>
+    const startBtn = document.getElementById('startBtn');
+    const intro = document.getElementById('intro');
+    const questionBox = document.getElementById('questionBox');
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const noFinal = document.getElementById('noFinal');
+    const yesFinal = document.getElementById('yesFinal');
+
+    let noCount = 0;
+
+    startBtn.onclick = () => {
+        intro.classList.add('hidden');
+        questionBox.classList.remove('hidden');
+        moveNoButton();
+    };
+
+    function moveNoButton() {
+        const x = Math.random() * (window.innerWidth - 140);
+        const y = Math.random() * (window.innerHeight - 80);
+        noBtn.style.left = x + 'px';
+        noBtn.style.top = y + 'px';
+    }
+
+    noBtn.onclick = () => {
+        noCount++;
+
+        if (noCount < 3) {
+            moveNoButton();
+        } else {
+            questionBox.classList.add('hidden');
+            noFinal.classList.remove('hidden');
+        }
+    };
+
+    yesBtn.onclick = () => {
+        questionBox.classList.add('hidden');
+        yesFinal.classList.remove('hidden');
+    };
+</script>
+
+</body>
+</html>
